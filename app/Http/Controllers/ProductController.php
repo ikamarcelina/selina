@@ -55,7 +55,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::find($id);
         return view('product.edit', compact('product'));
     }
 
@@ -71,8 +71,7 @@ class ProductController extends Controller
             'barcode' => 'required|string|max:100',
         ]);
 
-        $product = Product::findOrFail($id);
-        $product->update($validated);
+         Product::find($id)->update($request->all());
 
         return redirect()->route('product.index')->with('success', 'Produk berhasil diperbarui.');
     }

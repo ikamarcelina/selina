@@ -38,6 +38,10 @@
                                         <a href="/product/{{$p->id}}/edit">
                                             <x-primary-button>Edit</x-primary-button>
                                         </a>
+                                <form action="/product/{{$p->id}}" method="post" class="inline ml-1">
+                                    @csrf
+                                    @method('delete')
+                                    <x-danger-button>Hapus</x-danger-button>
                                     </td>
                                 </tr>
                             @endforeach
