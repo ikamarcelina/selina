@@ -10,7 +10,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <table class="w-full text-gray-500">
+                    {{-- Tombol Tambah Produk --}}
+                    <a href="/product/create">
+                        <x-primary-button>Tambah Produk</x-primary-button>
+                    </a>
+
+                    <table class="w-full text-gray-500 mt-4">
                         <thead class="bg-gray-50">
                             <tr>
                                 <td class="p-2">NO</td>
@@ -30,9 +35,9 @@
                                     <td class="p-2">{{ $p->price }}</td>
                                     <td class="p-2">{{ $p->barcode }}</td>
                                     <td class="p-2">
-                                        <!-- Tombol Aksi Bisa Ditaruh di sini -->
-                                        <a href="#" class="text-blue-600 hover:underline">Edit</a> |
-                                        <a href="#" class="text-red-600 hover:underline">Hapus</a>
+                                        <a href="/product/{{$p->id}}/edit">
+                                            <x-primary-button>Edit</x-primary-button>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
