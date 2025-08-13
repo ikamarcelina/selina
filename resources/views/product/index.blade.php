@@ -20,9 +20,9 @@
                             <tr>
                                 <td class="p-2">NO</td>
                                 <td class="p-2">NAMA PRODUK</td>
-                                <td class="p-2">STOK</td>
+                                <td class="p-2">DESKRIPSI</td>
                                 <td class="p-2">HARGA</td>
-                                <td class="p-2">BARCODE</td>
+                                <td class="p-2">STOK</td>
                                 <td class="p-2">AKSI</td>
                             </tr>
                         </thead>
@@ -31,17 +31,20 @@
                                 <tr class="border-b">
                                     <td class="p-2">{{ $loop->iteration }}</td>
                                     <td class="p-2">{{ $p->name }}</td>
-                                    <td class="p-2">{{ $p->stock }}</td>
+                                    <td class="p-2">{{ $p->description }}</td>
                                     <td class="p-2">{{ $p->price }}</td>
-                                    <td class="p-2">{{ $p->barcode }}</td>
+                                    <td class="p-2">{{ $p->stock }}</td>
                                     <td class="p-2">
                                         <a href="/product/{{$p->id}}/edit">
                                             <x-primary-button>Edit</x-primary-button>
                                         </a>
-                                <form action="/product/{{$p->id}}" method="post" class="inline ml-1">
+                                <form action="/product/{{$p->id}}" method="POST" style="display:inline;">
                                     @csrf
-                                    @method('delete')
-                                    <x-danger-button>Hapus</x-danger-button>
+                                    @method('DELETE')
+                                    <x-danger-button type="submit">
+                                    Hapus
+                                    </x-danger-button>
+                                </form>    
                                     </td>
                                 </tr>
                             @endforeach
