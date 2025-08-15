@@ -15,36 +15,44 @@
                         <x-primary-button>Tambah Produk</x-primary-button>
                     </a>
 
-                    <table class="w-full text-gray-500 mt-4">
+                    <table class="w-full text-gray-500 mt-4 border-collapse border border-gray-300">
                         <thead class="bg-gray-50">
                             <tr>
-                                <td class="p-2">NO</td>
-                                <td class="p-2">NAMA PRODUK</td>
-                                <td class="p-2">DESKRIPSI</td>
-                                <td class="p-2">HARGA</td>
-                                <td class="p-2">STOK</td>
-                                <td class="p-2">AKSI</td>
+                                <th class="p-2 border">NO</th>
+                                <th class="p-2 border">GAMBAR</th>
+                                <th class="p-2 border">NAMA PRODUK</th>
+                                <th class="p-2 border">DESKRIPSI</th>
+                                <th class="p-2 border">HARGA</th>
+                                <th class="p-2 border">STOK</th>
+                                <th class="p-2 border">AKSI</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($products as $p)
                                 <tr class="border-b">
-                                    <td class="p-2">{{ $loop->iteration }}</td>
-                                    <td class="p-2">{{ $p->name }}</td>
-                                    <td class="p-2">{{ $p->description }}</td>
-                                    <td class="p-2">{{ $p->price }}</td>
-                                    <td class="p-2">{{ $p->stock }}</td>
-                                    <td class="p-2">
-                                        <a href="/product/{{$p->id}}/edit">
+                                    <td class="p-2 border">{{ $loop->iteration }}</td>
+                                    <td class="p-2 border">
+                                        @if($p->image)
+                                            <img src="{{ asset('storage/' . $p->image) }}"
+                                                 alt="Gambar {{ $p->name }}"
+                                                 class="h-16 w-16 object-cover rounded">
+                                        @endif
+                                    </td>        
+                                    <td class="p-2 border">{{ $p->name }}</td>
+                                    <td class="p-2 border">{{ $p->description }}</td>
+                                    <td class="p-2 border">{{ number_format($p->price, 0, ',', '.') }}</td>
+                                    <td class="p-2 border">{{ $p->stock }}</td>
+                                    <td class="p-2 border flex gap-2">
+                                        <a href="/product/{{ $p->id }}/edit">
                                             <x-primary-button>Edit</x-primary-button>
                                         </a>
-                                <form action="/product/{{$p->id}}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <x-danger-button type="submit">
-                                    Hapus
-                                    </x-danger-button>
-                                </form>    
+                                        <form action="/product/{{ $p->id }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-danger-button type="submit">
+                                                Hapus
+                                            </x-danger-button>
+                                        </form>    
                                     </td>
                                 </tr>
                             @endforeach
